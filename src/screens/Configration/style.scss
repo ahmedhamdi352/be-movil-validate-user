@@ -1,0 +1,60 @@
+.Textcontainer{
+    display: flex;
+    flex-direction: column;
+}
+.Textcontent{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.title{
+    text-align: center;
+    font-family: Poppins;
+    font-size: 40px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+.text{
+    font-family: Poppins;
+    font-size: 15px;
+    text-align: center;
+    margin: 0;
+    width: 50%;
+}
+.user{
+    display: flex;
+    flex: 1 1;
+    flex-direction: column;
+    align-self: center;
+    width: 75%;
+    margin-top: 2%;
+}
+.user_text{
+    color: #eb062a;
+    display: flex;
+    align-self: flex-start;
+}
+.action{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    background-color: #ffffff;
+}
+.check1 {
+    border-left-width: 1px;
+    border-left-color: black;
+}
+.border{
+    border-left: 1px solid rgba(0, 0, 0, 0.16) ;
+    height: 25px;
+}
+
+// .MuiFormControlLabel-label{
+//     color: #eb062a;
+// }
