@@ -54,6 +54,59 @@
     border-left: 1px solid rgba(0, 0, 0, 0.16) ;
     height: 25px;
 }
+.action_content{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 30px;
+}
+.action_type{
+    border-radius: 10px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.action_type_active{
+    border-radius: 10px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    border: solid 1px #eb062a;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+.text_bold{
+    font-family: Poppins;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+.text_bold_active{
+    font-family: Poppins;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    color: #eb062a;
+}
+.text_normal{
+    font-family: Poppins;
+    font-size: 15px;
+    font-weight: normal;
+    width: 75%;
+    text-align: center;
+}
+.btn{
+    width: 30%;
+    display: flex;
+    align-self: center;
+    margin-top: 30px;
+}
 
 // .MuiFormControlLabel-label{
 //     color: #eb062a;
