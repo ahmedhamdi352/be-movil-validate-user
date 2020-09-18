@@ -90,7 +90,7 @@ export class Configration extends Component {
                 </div>
                 <Button 
                   className='btn' 
-                  style={{marginTop:'30px'}}
+                  style={{marginTop:'6%'}}
                   variant="outlined" 
                 //   color="#000000"
                   onClick={()=>this.handelRoute()}

@@ -57,3 +57,69 @@
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
     border: solid 1px #2cd19e;
 }
+
+[type="file"] {
+    height: 0;
+    overflow: hidden;
+    width: 0;
+  }
+  
+  [type="file"] + label {
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
+    // align-items: center;
+    // border: none;
+    // border-radius: 5px;
+    // cursor: pointer;
+    // font-family: 'Poppins';
+    // margin-bottom: 1rem;
+    // padding: 0.6rem 46px;
+    // border-radius: 10px;
+    // box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    // border: dotted 2px #b4b3b3;
+    // background-color: #ffffff;
+    // position: relative; 
+    // transition: all 0.3s; 
+    // vertical-align: middle;
+    // color: #000000;
+    // margin: 10px;
+    // max-width: 40%;
+    // width: 40%;
+
+    border-radius: 10px;
+    margin: 21px 18px; 
+    border: dotted 1px #b4b3b3;
+    height: 175px;
+    width: 30%;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .containers{
+    display: flex;
+    flex: 1 1;
+    flex-direction: column;
+    align-self: center;
+    width: 100%;
+    margin-top: 2%;
+  }
+  .uoload_content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  .download-text{
+      margin: 12px;
+  }
+  .filenames{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: #eb062a;
+  }

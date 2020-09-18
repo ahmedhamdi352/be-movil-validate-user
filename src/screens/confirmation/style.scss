@@ -1,0 +1,155 @@
+.confirmContiner{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 4;
+}
+.confirm_bold{
+    font-family: Poppins;
+    font-size: 25px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 0.8;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000000;
+    // margin: 0;
+    margin-top: 25px;
+}
+.confirm_normal{
+    font-family: Poppins;
+    font-size: 15px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000000;
+    margin: 0;
+}
+.confirmContent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.back{
+    margin-left: 5%;
+    margin-right: 5%;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    background-color: #ffffff;
+    padding: 10px;
+}
+.formConfirm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-top: 6%;
+}
+.formContnent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 50%;
+}
+
+.vaildate{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 6%;
+}
+
+.ComfirmLogo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1%;
+}
+
+.logo_confirm{
+    width: 75px;
+    /* margin-left: 35px; */
+    margin-right: 15px;
+}
+.TextConfirm{
+    font-family: Poppins;
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000000;
+}
+.continerTextConfirm{
+    display: flex;
+    align-self: center;
+    align-items: center;
+    width: 70%;
+}
+.circleDev{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #54d5af;
+    align-self: center;
+    margin:  1% 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.MuiSvgIcon-root{
+    font-size: 70px;
+    // color: #ffff;
+}
+.MuiSvgIcon-fontSizeLarge{
+    font-size:70px;
+}
+.btn_continer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    width: 80%;
+    margin-top: 4%;
+}
+.btn_print{
+    width: 180px;
+    padding: 8px;
+    margin-right: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.23);
+    border-radius: 4px;
+    display: flex;
+    text-decoration: none;
+    color: black;
+    justify-content: center;
+    align-items: center;
+}
+.btn_print:hover
+{
+
+    background-color: red;
+    color: #ffff;
+}
+.text_print{
+    margin: 0;
+    margin-left: 10px;
+}
+.btn_share{
+
+}
+.text_share{
+    margin: 0;
+    margin-left: 10px;
+}
+.test:hover{
+    background-color: red;
+}

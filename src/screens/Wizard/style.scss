@@ -8,12 +8,18 @@
 .textAction{
     margin-left: 6%;
     margin-top: 0px;
+    margin-bottom: 0;
     text-align: start;
-    padding: 4px;
     font-family: Poppins;
     font-size: 15px;
     font-weight: 600;
 }
 .MuiStepLabel-label.MuiStepLabel-completed{
     color: red;
+    
+}
+.MuiStep-horizontal {
+     padding-left: 0;
+     padding-right: 0; 
+     
 }

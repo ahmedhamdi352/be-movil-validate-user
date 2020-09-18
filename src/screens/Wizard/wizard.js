@@ -11,7 +11,6 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import {steps} from './steps/stepSetting'
 import './style.scss'
-import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import Step1 from './steps/stepOne'
 import Step2 from './steps/stepTwo'
 import Step3 from './steps/step3'
@@ -24,6 +23,7 @@ const useQontoStepIconStyles = makeStyles({
     display: 'flex',
     height: 22,
     alignItems: 'center',
+    
 
   },
   active: {
@@ -160,6 +160,7 @@ ColorlibStepIcon.propTypes = {
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
+    
   },
   button: {
     marginRight: theme.spacing(1),
@@ -188,13 +189,17 @@ function getStepContent(step,userType , next) {
   }
 }
 
-export default function CustomizedSteppers() {
+export default function CustomizedSteppers({history}) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const actionType = localStorage.getItem('action')
   const userType =  localStorage.getItem('userType');
 
   const handleNext = () => {
+    if(activeStep==3){
+      history.push('/info')
+
+    }
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
@@ -213,9 +218,11 @@ export default function CustomizedSteppers() {
         </div>
 
         
-      <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
+      <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}
+      style={{boxShadow:'0 3px 6px 0 rgba(0, 0, 0, 0.16)'}}
+      >
         {steps.map((label) => (
-          <Step key={label}>
+          <Step key={label} style={{paddingLeft:0,paddingRight:0}}>
             <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
           </Step>
         ))}
