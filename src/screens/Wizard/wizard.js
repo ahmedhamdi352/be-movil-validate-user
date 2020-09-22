@@ -14,7 +14,7 @@ import './style.scss'
 import Step1 from './steps/stepOne'
 import Step2 from './steps/stepTwo'
 import Step3 from './steps/step3'
-import Step4 from './steps/step4'
+import Step4 from './steps/step4/index'
 
 // import Step1 from './steps/step1';
 const useQontoStepIconStyles = makeStyles({
@@ -174,16 +174,16 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-function getStepContent(step,userType , next) {
+function getStepContent(userType,step ,handleBack,handleNext) {
   switch (step) {
     case 0:
-      return <Step1/> ;
+      return <Step1  userType={userType} handleBack={handleBack} handleNext={handleNext} activeStep={step}/> ;
     case 1:
-      return <Step2/>;
+      return <Step2  userType={userType} handleBack={handleBack} handleNext={handleNext} activeStep={step}/>;
     case 2:
-      return <Step3/>;
+      return <Step3  userType={userType} handleBack={handleBack} handleNext={handleNext} activeStep={step}/>;
       case 3:
-        return <Step4/>;
+        return <Step4 userType={userType} handleBack={handleBack} handleNext={handleNext} activeStep={step}/>;
     default:
       return 'Unknown step';
   }
@@ -229,19 +229,10 @@ export default function CustomizedSteppers({history}) {
       </Stepper>
   
       <div>
-        {activeStep === steps.length ? (
+
           <div>
-            <Typography className={classes.instructions}>
-              All steps completed - you&apos;re finished
-            </Typography>
-            <Button onClick={handleReset} className={classes.button}>
-              Reset
-            </Button>
-          </div>
-        ) : (
-          <div>
-            <Typography className={classes.instructions}>{getStepContent(activeStep, userType, handleNext)}</Typography>
-            <div style={{display:"flex",justifyContent:'center',alignItems:'center',marginTop:'6%'}}>
+            <Typography className={classes.instructions}>{getStepContent(userType,activeStep, handleBack, handleNext,)}</Typography>
+            {/* <div style={{display:"flex",justifyContent:'center',alignItems:'center',marginTop:'6%'}}>
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                 Back
               </Button>
@@ -254,9 +245,9 @@ export default function CustomizedSteppers({history}) {
               >
                 {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
               </Button>
-            </div>
+            </div> */}
           </div>
-        )}
+     
       </div>
     </div>
   );

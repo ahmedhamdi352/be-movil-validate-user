@@ -7,14 +7,14 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 import logger from "redux-logger";
-import ActionReducer from './store/reducers/actionTypes'
+import WizardReducer from './store/reducers/wizard'
 import FormsReducer from './store/reducers/forms'
 import {  createMuiTheme } from '@material-ui/core/styles';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 
 const rootReducer = combineReducers({
 
-  action:ActionReducer,
+  wizard:WizardReducer,
   form:FormsReducer
 
 });
