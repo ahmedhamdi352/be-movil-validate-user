@@ -20,7 +20,7 @@ import Popup from '../../../../components/popup'
       else {
           return(
             <>
-            {/* <Popup/> */}
+            <Popup/>
             <Nutural/>  
             </>
           )
