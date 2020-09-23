@@ -4,7 +4,7 @@ import React,{Component} from 'react';
 import LocalMallIcon from '@material-ui/icons/LocalMall';
 import Button from '@material-ui/core/Button';
 import {connect} from 'react-redux'
-import {SET_FILE_ONE} from '../../../../store/actions/wizard'
+import {SET_FILE_ONE,SET_FILE_TWO} from '../../../../store/actions/wizard'
 
 
 class App extends Component { 
@@ -28,7 +28,11 @@ class App extends Component {
     onFile1Change =event =>{
         console.log(event.target.files[0])
         this.setState({ selectedFile1: event.target.files[0]})
+        this.props.setFileTwo(event.target.files[0])
+
     } 
+
+    
 	
 	fileData = () => { 
 	
@@ -88,6 +92,12 @@ const dispatchToProps = (dispatch) => ({
           formData
       })
   },
+  setFileTwo:(formData)=>{
+    dispatch({
+        type:SET_FILE_TWO,
+        formData
+    })
+},
   
   });
   

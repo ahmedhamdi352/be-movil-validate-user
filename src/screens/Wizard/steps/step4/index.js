@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import Nutural from './stepfour'
 import { useSelector } from 'react-redux';
 import * as WizardActions from '../../../../store/actions/wizard'
@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import {steps} from '../../steps/stepSetting'
-
+import {isEmpty} from 'lodash'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -23,12 +23,37 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 const Step4 = ({userType,activeStep,handleNext,handleBack}) => {
+  const fileOneData = useSelector(state => state.wizard.fileone);
+  const fileTwoData = useSelector(state => state.wizard.filetwo);
+
+  const [avalible,setAvilable]=useState(true)
+  console.log(fileTwoData.name,fileOneData.name)
+  if( fileTwoData.name !== undefined){
+    console.log("tetetet")
+  }
+  
+  useEffect(() => {
+    
+    const fetch= async ()=>{
+      
+      if( fileOneData.name !== undefined && fileTwoData.name !== undefined){
+        setAvilable(false)
+        console.log(avalible)
+      }
+      else {
+        setAvilable(true)
+        console.log(avalible)
+      }
+
+}
+
+
+fetch();
+   
+ }, [fileOneData,fileTwoData]);
 
   const classes = useStyles();
-  const dispatch=useDispatch();
  
- 
-
           return(
             <>
             {/* <Popup/> */}
@@ -40,6 +65,7 @@ const Step4 = ({userType,activeStep,handleNext,handleBack}) => {
                 Back
               </Button>
               <Button
+                disabled={avalible}
                 variant="contained"
                 color="secondary"
                 type='submit'

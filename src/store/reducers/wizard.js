@@ -1,4 +1,4 @@
-import {  SET_STEP_ONE_NATURAL,SET_STEP_TWO,SET_FILE_ONE } from '../actions/wizard';
+import {  SET_STEP_ONE_NATURAL,SET_STEP_TWO,SET_FILE_ONE,SET_FILE_TWO } from '../actions/wizard';
 
 const initialState = {
   step1_natural:{
@@ -36,10 +36,8 @@ const initialState = {
 
   },
   step3:{},
-  step4:{
-      fileone:{},
-      filetwo:{}
-  }
+  fileone:{},
+  filetwo:{}
 };
 
 export default (state = initialState, action) => {
@@ -57,11 +55,15 @@ export default (state = initialState, action) => {
             };
 
         case SET_FILE_ONE:
-            console.log({...state.step4.filetwo})
-            console.log(action.formData)
             return {
              ...state,
-             step4: {...state.step4,...action.formData},
+             fileone: action.formData,
+            };
+
+            case SET_FILE_TWO:
+            return {
+             ...state,
+             filetwo: action.formData,
             };
       
     default:
