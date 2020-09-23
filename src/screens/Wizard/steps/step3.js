@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
@@ -7,6 +6,10 @@ import { red } from '@material-ui/core/colors';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import Checkbox from '@material-ui/core/Checkbox';
 import './style.scss'
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import {steps} from '../steps/stepSetting'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
@@ -28,9 +31,22 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     backgroundColor: red[500],
   },
+
+  rootBtn: {
+    width: '100%',
+    
+  },
+  buttonBtn: {
+    marginRight: theme.spacing(1),
+    
+  },
+  instructionsBtn: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+  },
 }));
 
-export default function RecipeReviewCard() {
+export default function RecipeReviewCard({userType,activeStep,handleNext,handleBack}) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [section, setSection] = React.useState(false);
@@ -63,8 +79,6 @@ export default function RecipeReviewCard() {
     setSection2(!section2)
     setSection3(!section3)
     setSection4(!section4)
-
-
   };
 
   return (
@@ -240,6 +254,26 @@ export default function RecipeReviewCard() {
        </section>
 
       </div>
+
+      <div style={{marginTop:'12%'}}>
+            <div style={{display:"flex",justifyContent:'center',alignItems:'center',marginTop:'12%'}}>
+              <Button disabled={activeStep === 0} onClick={handleBack} className={classes.buttonBtn}>
+                Back
+              </Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                type='submit'
+                onClick={handleNext}
+                className={classes.buttonBtn}
+                size='medium'
+              >
+                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+              </Button>
+            </div>
+          </div>
+
+
       </>
   );
 }

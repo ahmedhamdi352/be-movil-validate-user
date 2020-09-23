@@ -4,8 +4,16 @@ import Juridica from './juridica'
 import { useDispatch } from 'react-redux';
 import * as ActionTypes from '../../../../store/actions/actionType'
 import Popup from '../../../../components/popup'
- const Step1 = ({userType,next}) => {
-  const dispatch = useDispatch();
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import {steps} from '../../steps/stepSetting'
+
+
+
+
+const Step1 = ({userType,activeStep,handleNext,handleBack}) => {
+
+  console.log(userType)
 
  
  
@@ -20,8 +28,10 @@ import Popup from '../../../../components/popup'
       else {
           return(
             <>
-            <Popup/>
-            <Nutural/>  
+            {/* <Popup/> */}
+            <Nutural handleBack={handleBack} handleNext={handleNext} activeStep={activeStep}/>  
+
+           
             </>
           )
       }

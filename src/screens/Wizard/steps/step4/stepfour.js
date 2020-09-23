@@ -3,6 +3,9 @@ import axios from 'axios';
 import React,{Component} from 'react'; 
 import LocalMallIcon from '@material-ui/icons/LocalMall';
 import Button from '@material-ui/core/Button';
+import {connect} from 'react-redux'
+import {SET_FILE_ONE} from '../../../../store/actions/wizard'
+
 
 class App extends Component { 
 
@@ -17,7 +20,9 @@ class App extends Component {
 	onFileChange = event => { 
 	
 	// Update the state 
-	this.setState({ selectedFile: event.target.files[0] }); 
+    this.setState({ selectedFile: event.target.files[0] }); 
+    console.log( event.target.files[0])
+    this.props.setFileOne(event.target.files[0])
 	
     };
     onFile1Change =event =>{
@@ -40,6 +45,8 @@ class App extends Component {
 	}; 
 	
 	render() { 
+        const {userType,activeStep,handleNext,handleBack}=this.props
+
 	
 	return ( 
 	<div> 
@@ -68,9 +75,20 @@ class App extends Component {
             
             </div>
 		{this.fileData()} 
+
+        
 		</div> 
 	); 
 	} 
 } 
-
-export default App; 
+const dispatchToProps = (dispatch) => ({
+    setFileOne:(formData)=>{
+      dispatch({
+          type:SET_FILE_ONE,
+          formData
+      })
+  },
+  
+  });
+  
+  export default connect(null, dispatchToProps)(App);

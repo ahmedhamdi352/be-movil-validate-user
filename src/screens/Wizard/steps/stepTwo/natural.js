@@ -5,18 +5,40 @@ import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import FormikControl from '../../../../components/form/formControl';
 import './style.scss'
-export const juridica = () => {
-    const initialValues = {
-        email: '',
-        password: ''
-      }
+import { useSelector } from 'react-redux';
+import * as WizardActions from '../../../../store/actions/wizard'
+import { useDispatch } from 'react-redux';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import {steps} from '../../steps/stepSetting'
+
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    
+  },
+  button: {
+    marginRight: theme.spacing(1),
+    
+  },
+  instructions: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+  },
+}));
+
+export const Natrual = () => {
+  const classes = useStyles();
+  const dispatch=useDispatch();
+
+  const initialValues = useSelector(state => state.wizard.step2_natural);
+  console.log(initialValues)
+  
     
     
       const validationSchema = Yup.object({
-        // email: Yup.string()
-        //   .email('Invalid email format')
-        //   .required('Required'),
-        // password: Yup.string().required('Required')
+        
       })
     
       const onSubmit = values => {
@@ -150,6 +172,25 @@ export const juridica = () => {
                 />
                </section>
                 {/* <button type='submit' disabled={!formik.isValid} className='form-btn'>Login</button> */}
+                <div style={{marginTop:'12%'}}>
+            <div style={{display:"flex",justifyContent:'center',alignItems:'center',marginTop:'12%'}}>
+              <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+                Back
+              </Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                type='submit'
+                // onClick={handleNext}
+                className={classes.button}
+                size='medium'
+              >
+                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+              </Button>
+            </div>
+          </div>
+
+
               </Form>
             </div>
             )
@@ -168,4 +209,4 @@ const mapDispatchToProps = {
     
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(juridica)
+export default connect(mapStateToProps, mapDispatchToProps)(Natrual)
