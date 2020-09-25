@@ -27,7 +27,6 @@ const Step4 = ({userType,activeStep,handleNext,handleBack}) => {
   const fileTwoData = useSelector(state => state.wizard.filetwo);
 
   const [avalible,setAvilable]=useState(true)
-  console.log(fileTwoData.name,fileOneData.name)
   if( fileTwoData.name !== undefined){
     console.log("tetetet")
   }
@@ -65,7 +64,7 @@ fetch();
                 Back
               </Button>
               <Button
-                disabled={avalible}
+                disabled={false}
                 variant="contained"
                 color="secondary"
                 type='submit'

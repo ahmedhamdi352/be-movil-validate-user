@@ -14,7 +14,7 @@ import Button from '@material-ui/core/Button';
     }
     const handelClick =()=>{
         //check number
-        history.push('/final')
+        history.push('/take-id')
 
 
     }
