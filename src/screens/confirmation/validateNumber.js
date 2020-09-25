@@ -29,7 +29,7 @@ import { useSelector } from 'react-redux';
     }
     const handelClick =()=>{
         //check number
-        history.push('/final')
+        history.push('/take-id')
 
 
     }
