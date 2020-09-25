@@ -6,12 +6,20 @@ import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import FormikControl from '../../components/form/formControl';
 import './style.scss'
- const Info = ({history}) => {
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import * as WizardActions from '../../store/actions/wizard'
+import {API_URL} from '../../config';
+import axios from 'axios';
 
-    const initialValues = {
-        email: '',
-        password: ''
-      }
+
+ const Info = ({history}) => {
+   const dispatch=useDispatch();
+  const initialValues = useSelector(state => state.wizard.info);
+  const general_info = useSelector(state=> state.wizard.step1_natural)
+  
+
+  console.log("init",initialValues)
     
     
       const validationSchema = Yup.object({
@@ -23,7 +31,16 @@ import './style.scss'
     
       const onSubmit = values => {
         console.log('Form data', values)
+
+        const action =  WizardActions.setinfo(values)
+        dispatch(action);
         //handel send sms APi
+        axios.post(`${API_URL}api/verify`,{phone:general_info.mobile_phone})
+        .then((res)=>{
+          console.log(res)
+        })
+        .catch((err)=>console.log(err))
+
 
         history.push('/valide-sms')
 
@@ -63,33 +80,32 @@ import './style.scss'
                   control='input'
                   type='text'
                   label='Nombres:'
-                  name='Nombres:'
+                  name='name_info'
                   width='300px'
                 />
-               <FormikControl
+                <FormikControl
                   control='input'
                   type='text'
                   label='Apellidos'
-                 name='Apellidos'
+                 name='lastname_info'
                  width='300px'
 
                />
                <FormikControl
                   control='input'
                   type='text'
-                  label='ID Be Movil'
-                 name='ID'
-                 width='300px'
+                  label='Correo Electrónico'
+                  name='email_info'
+                  width='300px'
 
                />
                 <FormikControl
                   control='input'
-                  type='text'
-                  label='ID Be Movil'
-                 name='ID'
-                 width='300px'
-
-               />
+                  type='number'
+                  label='Número Celular'
+                  name='number_info'
+                  width='300px'
+               /> 
          
                </div>
                <Button 
