@@ -5,7 +5,7 @@ export const SET_STEP_TWO='SET_STEP_TWO';
 
 export const SET_FILE_ONE='SET_FILE_ONE';
 export const SET_FILE_TWO='SET_FILE_TWO';
-
+export const SET_INFO_DATA='SET_INFO_DATA';
 
 
 
@@ -30,5 +30,11 @@ export const setStepOneNatural = (formData) => {
   export const setFileTwo = (formData) => {
     return dispatch => {
       dispatch({ type: SET_FILE_TWO, data: formData,});
+    };
+  };
+
+  export const setinfo = (formData) => {
+    return dispatch => {
+      dispatch({ type: SET_INFO_DATA, data: formData,});
     };
   };

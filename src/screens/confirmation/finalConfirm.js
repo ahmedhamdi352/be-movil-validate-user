@@ -24,7 +24,7 @@
 //   );
 // }
 
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import logo1 from '../../assest/images/Group5216.png'
@@ -33,7 +33,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 
  const FinalConfirm =({history})=>  {
-  
+
+    
     const [checked,setChecked]=React.useState(false)
         return (
      <div style={{marginTop:'5px',display:'flex',flexDirection:'column'}}>
