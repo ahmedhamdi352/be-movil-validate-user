@@ -9,14 +9,14 @@ import './style.scss'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import * as WizardActions from '../../store/actions/wizard'
-import {API_URL} from '../../config';
-import axios from 'axios';
+
 
 
  const Info = ({history}) => {
    const dispatch=useDispatch();
+   const general_info = useSelector(state=> state.wizard.step1_natural)
+
   const initialValues = useSelector(state => state.wizard.info);
-  const general_info = useSelector(state=> state.wizard.step1_natural)
   
 
   console.log("init",initialValues)
@@ -29,18 +29,36 @@ import axios from 'axios';
         // password: Yup.string().required('Required')
       })
     
-      const onSubmit = values => {
+      const onSubmit = async values => {
         console.log('Form data', values)
 
         const action =  WizardActions.setinfo(values)
         dispatch(action);
         //handel send sms APi
-        axios.post(`${API_URL}api/verify`,{phone:general_info.mobile_phone})
-        .then((res)=>{
-          console.log(res)
-        })
-        .catch((err)=>console.log(err))
 
+    
+          // axios.post(`${API_URL}api/verify`,{phone:general_info.mobile_phone})
+          // .then((res)=>{
+          //   console.log(res)
+          // })
+          // .catch((err)=>console.log(err))
+
+         
+          let response = () => {
+              return new Promise(function(resolve, reject) {
+                fetch('http://192.168.56.1:8000/api/verify/', {
+                  params: {
+                      phone:general_info.mobile_phone
+                  }
+                }).then(response => {
+                  resolve(response);
+                });
+              });
+            };
+            let responseData = await response();
+            console.log(responseData.data);
+            
+        
 
         history.push('/valide-sms')
 

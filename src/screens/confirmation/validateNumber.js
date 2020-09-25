@@ -17,18 +17,8 @@ import { useSelector } from 'react-redux';
 
     useEffect(() => {
 
-        const fetch= async ()=>{
-    
-            axios.post(`${API_URL}api/verify`,{phone:general_info.mobile_phone})
-            .then((res)=>{
-              console.log(res)
-            })
-            .catch((err)=>console.log(err))
-    
-     }
-     
-     
-     fetch();
+        
+    //  fetch();
          
        }, []);  
 
