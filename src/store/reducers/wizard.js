@@ -1,5 +1,8 @@
 
-import {  SET_STEP_ONE_NATURAL,SET_STEP_TWO,SET_FILE_ONE,SET_FILE_TWO,SET_INFO_DATA } from '../actions/wizard';
+import {  SET_STEP_ONE_NATURAL,SET_STEP_TWO,SET_FILE_ONE,SET_FILE_TWO,SET_INFO_DATA,
+    SET_PHOTO,SET_PHOTO1,SET_PHOTO2
+
+} from '../actions/wizard';
 
 const initialState = {
   step1_natural:{
@@ -44,7 +47,10 @@ const initialState = {
     email_info :'',
     lastname_info :'',
     number_info:''
-  }
+  },
+  photo1:null,
+  photo2:{},
+  photo3:{}
 };
 
 export default (state = initialState, action) => {
@@ -77,6 +83,22 @@ export default (state = initialState, action) => {
                 ...state,
                 info: action.data,
                 };
+                case SET_PHOTO:
+                return {
+                ...state,
+                photo1: action.data,
+                };
+                case SET_PHOTO1:
+                    return {
+                    ...state,
+                    photo2: action.data,
+                    };
+
+                    case SET_PHOTO2:
+                        return {
+                        ...state,
+                        photo3: action.data,
+                        };
       
     default:
       return state;

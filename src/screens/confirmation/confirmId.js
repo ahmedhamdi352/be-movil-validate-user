@@ -24,7 +24,7 @@ const ConfirmId = ({history}) => {
   };
 
   const handelnext=()=>{
-    history.push('/final')
+    history.push('/take-photo')
 
   }
 

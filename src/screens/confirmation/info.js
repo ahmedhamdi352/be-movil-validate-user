@@ -37,26 +37,22 @@ import * as WizardActions from '../../store/actions/wizard'
         //handel send sms APi
 
     
-          // axios.post(`${API_URL}api/verify`,{phone:general_info.mobile_phone})
-          // .then((res)=>{
-          //   console.log(res)
-          // })
-          // .catch((err)=>console.log(err))
+   
 
          
-          let response = () => {
-              return new Promise(function(resolve, reject) {
-                fetch('http://192.168.56.1:8000/api/verify/', {
-                  params: {
-                      phone:general_info.mobile_phone
-                  }
-                }).then(response => {
-                  resolve(response);
-                });
-              });
-            };
-            let responseData = await response();
-            console.log(responseData.data);
+          // let response = () => {
+          //     return new Promise(function(resolve, reject) {
+          //       fetch('http://192.168.56.1:8000/api/verify/', {
+          //         params: {
+          //             phone:general_info.mobile_phone
+          //         }
+          //       }).then(response => {
+          //         resolve(response);
+          //       });
+          //     });
+          //   };
+          //   let responseData = await response();
+          //   console.log(responseData.data);
             
         
 
