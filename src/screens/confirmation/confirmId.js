@@ -3,28 +3,44 @@ import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import id1 from '../../assest/images/id.png'
 import id2 from '../../assest/images/Bid.png'
 import Button from '@material-ui/core/Button';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import * as WizardActions from '../../store/actions/wizard'
+import Popup from '../../components/popup'
+import CameraAltIcon from '@material-ui/icons/CameraAlt';
 
 const ConfirmId = ({history}) => {
-  const[imgF,setImagF]=useState(null)
-  const[imgB,setImagB]=useState(null)
+  // const[imgF,setImagF]=useState(null)
+  // const[imgB,setImagB]=useState(null)
+  const dispatch=useDispatch();
 
-  const onFileChange = (event,option) => { 
-    console.log(option)
-    if(option ==="front"){
-      console.log("herrrrrrr")
+  const imgF = useSelector(state => state.wizard.id_front);
+  const imgB = useSelector(state => state.wizard.id_back);
+  const error = useSelector(state => state.wizard.error);
 
-      setImagF(URL.createObjectURL(event.target.files[0]))
-    }
-    else {
 
-      setImagB(URL.createObjectURL(event.target.files[0]))
-    }
-    // Update the state 
-      
+
+
+  const onFileChange = (event) => { 
+      dispatch(WizardActions.setIdFront(event.target.files[0]))   
   };
 
+  const onFileChange1 = (event) =>{
+    dispatch(WizardActions.setIdBack(event.target.files[0]))
+  }
+
   const handelnext=()=>{
-    history.push('/take-photo')
+
+    
+
+      if( imgF == null || imgB == null){
+        dispatch(WizardActions.setError(true))
+      }
+      else {
+        history.push('/take-photo')
+       
+      }
+
 
   }
 
@@ -35,7 +51,7 @@ const ConfirmId = ({history}) => {
       <p className= 'textAction'>FIRMA DEL CONTRATO</p> 
     </div>
     <div className='confirmContent'>
-        <div className='back'>
+        <div className='back'  onClick={()=>history.goBack()}>
             <KeyboardBackspaceIcon/>
         </div>
 
@@ -51,15 +67,41 @@ const ConfirmId = ({history}) => {
     <div className='ComfirmLogo' style={{marginTop:'6%',width:'65%'}}>
       <div className="id_content">
         {console.log('f',imgF,'b',imgB)}
-      <img src={imgF!==null?imgF:id1} alt='img' className='id_f'/>
+
+
+      <img src={imgF!==null?URL.createObjectURL(imgF):id1} alt='img' className='id_f'/>
+      <label for="file" className="label_test"
+         style={{display:'flex',
+         justifyContent:'center',
+         justifyItems:'center',
+         color:'#b4b3b3',
+         width: '200px',
+         }}>
+          <CameraAltIcon style={{color:'#b4b3b3',marginRight:'5px'}}/>
+          Abrir Camara
+          </label>
+        <input type="file"  id="file" onChange={(e)=>onFileChange(e)}/>
    
-        <label for="file" className="label_test">upload</label>
-        <input type="file"  id="file" onChange={(e)=>onFileChange(e,"front")}/>
+        {/* <label for="file" className="label_test">upload</label>
+        <input type="file"  id="file" onChange={(e)=>onFileChange(e,"front")}/> */}
       </div>
       <div className="id_content">
-      <img src={imgB!==null?imgB:id2} alt='img' className='id_b'/>
-      <label for="file1" className="label_test">upload</label>
-        <input type="file" id="file1"  onChange={(e)=>onFileChange(e,"back")}/>
+      <img src={imgB!==null?URL.createObjectURL(imgB):id2} alt='img' className='id_b'/>
+
+      <label for="file1" className="label_test"
+         style={{display:'flex',
+         justifyContent:'center',
+         justifyItems:'center',
+         color:'#b4b3b3',
+         width: '200px',
+         }}>
+          <CameraAltIcon style={{color:'#b4b3b3',marginRight:'5px'}}/>
+          Abrir Camara
+          </label>
+        <input type="file"  id="file1" onChange={(e)=>onFileChange1(e)}/>
+   
+      {/* <label for="file1" className="label_test">upload</label>
+        <input type="file" id="file1"  onChange={(e)=>onFileChange(e,"back")}/> */}
       </div>
     </div>
     <Button 
@@ -71,6 +113,8 @@ const ConfirmId = ({history}) => {
         >
          Continue
        </Button>
+       {error&&<Popup />}
+
     </div>
 
    

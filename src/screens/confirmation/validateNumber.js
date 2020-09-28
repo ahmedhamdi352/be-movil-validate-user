@@ -43,7 +43,7 @@ import { useSelector } from 'react-redux';
           <p className= 'textAction'>FIRMA DEL CONTRATO</p> 
         </div>
         <div className='confirmContent'>
-            <div className='back'>
+            <div className='back' onClick={()=>history.goBack()}>
                 <KeyboardBackspaceIcon/>
             </div>
 

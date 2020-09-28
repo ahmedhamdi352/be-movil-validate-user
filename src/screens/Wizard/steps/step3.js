@@ -9,6 +9,10 @@ import './style.scss'
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import {steps} from '../steps/stepSetting'
+import { useSelector } from 'react-redux';
+import Popup from '../../../components/popup'
+import * as wizardActions from '../../../store/actions/wizard'
+import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,6 +51,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function RecipeReviewCard({userType,activeStep,handleNext,handleBack}) {
+  const dispatch =useDispatch()
+  const error = useSelector(state => state.wizard.error);
+
+
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [section, setSection] = React.useState(false);
@@ -68,18 +76,42 @@ export default function RecipeReviewCard({userType,activeStep,handleNext,handleB
 
 
   const handelClickall = () => {
-    setAll(!all)
-    setExpanded(false);
-    setExpanded1(false);
-    setExpanded2(false);
-    setExpanded3(false);
-    setExpanded4(false);
-    setSection(!section)
-    setSection1(!section1)
-    setSection2(!section2)
-    setSection3(!section3)
-    setSection4(!section4)
+    if(all == false){
+      
+      setAll(true)
+      setExpanded(false);
+      setExpanded1(false);
+      setExpanded2(false);
+      setExpanded3(false);
+      setExpanded4(false);
+      setSection(true)
+      setSection1(true)
+      setSection2(true)
+      setSection3(true)
+      setSection4(true)
+    }
+    else{
+      setAll(false)
+      setExpanded(false);
+      setExpanded1(false);
+      setExpanded2(false);
+      setExpanded3(false);
+      setExpanded4(false);
+      setSection(false)
+      setSection1(false)
+      setSection2(false)
+      setSection3(false)
+      setSection4(false)
+    }
   };
+  const clicknext = ()=>{
+    if(!all){
+      dispatch(wizardActions.setError(true))
+    }
+    else {
+      handleNext()
+    }
+  }
 
   return (
       <>
@@ -180,6 +212,9 @@ export default function RecipeReviewCard({userType,activeStep,handleNext,handleB
             <p className='textCollapse_'>
             En mi calidad de Titular de la información o Representante Legal del mismo, autorizo a BE MOVIL a dar Tratamiento a mis datos personales, de acuerdo a la Ley 1581 de 2012 y el decreto reglamentario 1377 de 2013 para:
             </p>
+            <p className='textCollapse_'>
+            a)     Establecer comunicación directa por diferentes medios (impreso, telefónico, sms, correos electrónicos) con objetivos comerciales asociados a productos y/o servicios. 
+            </p>
             
             <p className='textCollapse_'>
             b)     Evaluar la calidad de los servicio. 
@@ -195,17 +230,12 @@ export default function RecipeReviewCard({userType,activeStep,handleNext,handleB
             e)     Transferir o transmitir la información de contacto, para el envío de información comercial de los productos y/o servicios comercializados.
             </p>
             <p className='textCollapse_'>
-            a)     Establecer comunicación directa por diferentes medios (impreso, telefónico, sms, correos electrónicos) con objetivos comerciales asociados a productos y/o servicios. 
-            </p>
-            <p className='textCollapse_'>
             f)      Programas de fidelización y actualización de datos
             </p>
             <p className='textCollapse_'>
             g)     Utilización de datos biométricos como huella digital, audio, video y/o fotografía o a través de cualquier otro medio conocido o por conocerse (se entiende como “imagen” el nombre, seudónimo, voz, firmas, iniciales, figura, fisionomía de cuerpo, cara o cualquier signo que se relacione con la identidad de la persona), para reproducción, comunicación o transmisión.
             </p>
-            <p className='textCollapse_'>
-            a)     Establecer comunicación directa por diferentes medios (impreso, telefónico, sms, correos electrónicos) con objetivos comerciales asociados a productos y/o servicios. 
-            </p>
+          
             <p className='textCollapse_'>
             h)     Información para el diligenciamiento de planilla, manejo y uso de la plataforma sirse.            </p>
             <p className='textCollapse_'>
@@ -264,12 +294,15 @@ export default function RecipeReviewCard({userType,activeStep,handleNext,handleB
                 variant="contained"
                 color="secondary"
                 type='submit'
-                onClick={handleNext}
+                onClick={clicknext}
                 className={classes.buttonBtn}
                 size='medium'
               >
                 {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
               </Button>
+
+              {error&&<Popup/>}
+
             </div>
           </div>
 

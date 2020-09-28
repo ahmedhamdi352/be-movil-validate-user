@@ -5,6 +5,7 @@ import {get} from 'lodash'
 
 function FormikControl (props) {
   const { control,width, ...rest } = props;
+  // console.log({...rest})
   const FiledComponent = get(fieldControl,control,fieldControl.Input);
   return <FiledComponent style={{margin:"10px",width:width}} {...rest} />
 

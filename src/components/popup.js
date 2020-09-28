@@ -3,19 +3,18 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import logo1 from '../assest/images/Group5216.png'
 import logo2 from '../assest/images/Group5032.png'
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
+import * as wizardActions from '../store/actions/wizard'
+import { useDispatch } from 'react-redux';
+
 import './style.scss'
-const  AlertDialog =()=> {
+const  AlertDialog =({reset})=> {
+  const dispatch =useDispatch()
 const [open, setOpen] = React.useState(false);
 
     React.useEffect(() => {
-
-        
-     
      setOpen(true);
          
        }, []);
@@ -23,6 +22,11 @@ const [open, setOpen] = React.useState(false);
     
 
   const handleClose = () => {
+    dispatch(wizardActions.setError(false))
+    if(reset){
+
+      reset({})
+    }
     setOpen(false);
   };
 

@@ -8,7 +8,7 @@ import ValidateNumber from './screens/confirmation/validateNumber'
 import ValidateID from './screens/confirmation/confirmId'
 import FinalConfirm from './screens/confirmation/finalConfirm'
 import Share from './screens/confirmation/share'
-import ConfirmPhoto from './screens/confirmation/confirmPhoto'
+import ConfirmPhoto from './screens/confirmation/photo'
 
 
 import {BrowserRouter as Router, Switch,Route,} from "react-router-dom";
@@ -26,10 +26,6 @@ const App = () => {
         <Route  path="/final" exact component={FinalConfirm} />
         <Route  path="/share" exact component={Share} />
         <Route  path="/take-photo" exact component={ConfirmPhoto} />
-
-
-
-
 
 
       </Switch>

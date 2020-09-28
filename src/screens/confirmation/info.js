@@ -9,24 +9,22 @@ import './style.scss'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import * as WizardActions from '../../store/actions/wizard'
-
+import Popup from '../../components/popup'
 
 
  const Info = ({history}) => {
    const dispatch=useDispatch();
-   const general_info = useSelector(state=> state.wizard.step1_natural)
 
   const initialValues = useSelector(state => state.wizard.info);
-  
+  const error = useSelector(state => state.wizard.error);
+
 
   console.log("init",initialValues)
     
     
       const validationSchema = Yup.object({
-        // email: Yup.string()
-        //   .email('Invalid email format')
-        //   .required('Required'),
-        // password: Yup.string().required('Required')
+     
+        name_info: Yup.string().required('Required')
       })
     
       const onSubmit = async values => {
@@ -35,26 +33,6 @@ import * as WizardActions from '../../store/actions/wizard'
         const action =  WizardActions.setinfo(values)
         dispatch(action);
         //handel send sms APi
-
-    
-   
-
-         
-          // let response = () => {
-          //     return new Promise(function(resolve, reject) {
-          //       fetch('http://192.168.56.1:8000/api/verify/', {
-          //         params: {
-          //             phone:general_info.mobile_phone
-          //         }
-          //       }).then(response => {
-          //         resolve(response);
-          //       });
-          //     });
-          //   };
-          //   let responseData = await response();
-          //   console.log(responseData.data);
-            
-        
 
         history.push('/valide-sms')
 
@@ -65,7 +43,7 @@ import * as WizardActions from '../../store/actions/wizard'
           <p className= 'textAction'>FIRMA DEL CONTRATO</p> 
         </div>
         <div className='confirmContent'>
-            <div className='back'>
+            <div className='back' onClick={()=>history.goBack()}>
                 <KeyboardBackspaceIcon/>
             </div>
 
@@ -85,6 +63,8 @@ import * as WizardActions from '../../store/actions/wizard'
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={onSubmit}
+          validateOnChange={false}
+          validateOnBlur={false}
          >
           {formik => {
               return (
@@ -131,6 +111,8 @@ import * as WizardActions from '../../store/actions/wizard'
                   >
                      Continue
                 </Button>
+                {error&&<Popup reset={formik.setErrors}/>}
+
                 
               </Form>
             )

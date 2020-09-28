@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import {steps} from '../../steps/stepSetting'
-
+import Popup from '../../../../components/popup'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,11 +33,13 @@ export const Step2 = ({userType,activeStep,handleNext,handleBack}) => {
   const dispatch=useDispatch();
 
   const initialValues = useSelector(state => state.wizard.step2);
-  console.log(initialValues)
+  const error = useSelector(state => state.wizard.error);
+
   
     
     
       const validationSchema = Yup.object({
+        total_pasivos: Yup.string().required()
         
       })
     
@@ -60,6 +62,8 @@ export const Step2 = ({userType,activeStep,handleNext,handleBack}) => {
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={onSubmit}
+          validateOnChange={false}
+          validateOnBlur={false}
          >
           {formik => {
               return (
@@ -69,75 +73,58 @@ export const Step2 = ({userType,activeStep,handleNext,handleBack}) => {
                 <FormikControl
                   control='input'
                   type='text'
-                  label='Nombres:'
-                  name='Nombres:'
+                  label='Nombre del Establecimiento'
+                  name='company_name'
                 />
                <FormikControl
                   control='input'
                   type='text'
-                  label='Apellidos'
-                 name='Apellidos'
+                  label='Actividad Economica'
+                 name='actividad_economica'
                />
                <FormikControl
                   control='input'
                   type='text'
-                  label='ID Be Movil'
-                 name='ID'
+                  label='Dirección'
+                 name='direccion'
                />
                 <FormikControl
                   control='input'
                   type='text'
-                  label='Celular'
-                 name='Celular'
+                  label='Barrio:'
+                 name='barrio'
                />
                 <FormikControl
                   control='input'
                   type='text'
-                  label='Tipo de Identificación:'
-                 name='Tipo'
+                  label='Ciudad:'
+                 name='ciudad'
                />
                <FormikControl
                   control='input'
                   type='text'
-                  label='Número'
-                 name='Número:'
+                  label='Departamento:'
+                 name='departamento'
                />
                 <FormikControl
                   control='input'
                   type='text'
-                  label='Lugar de Expedición'
-                 name='Lugar'
+                  label='Celular:'
+                 name='mobile_phone_fin'
                />
                <FormikControl
                   control='input'
                   type='text'
-                  label='Fecha de Expedición:'
-                 name='Fecha'
+                  label='Teléfono fijo:'
+                 name='telefono_fijo'
                />
                 <FormikControl
                   control='input'
                   type='text'
                   label='Correo Electrónico:'
-                 name='Correo'
+                 name='email_fin'
                />
-               <FormikControl
-                  control='input'
-                  type='text'
-                  label='Dirección de Domicilio:'
-                 name='Dirección'
-               />
-                  <FormikControl
-                  control='input'
-                  type='text'
-                  label='Ciudad'
-                 name='Ciudad'
-               />
-                  <FormikControl
-                  control='input'
-                  type='text'
-                  label='Departamento '
-                 name='Departamento'
-               />
+        
                </section>
                <section style={{width:'100%'}}>
                <div className='titleAction' style={{marginTop:'10px'}} > 
@@ -151,28 +138,28 @@ export const Step2 = ({userType,activeStep,handleNext,handleBack}) => {
                   type='number'
                   prfix='COP'
                   label='Ingresos:'
-                  name='Ingresos'
+                  name='ingresos'
                 />
                  <FormikControl
                   control='InputPrfix'
                   type='number'
                   prfix='COP'
                   label='Total Activos:'
-                  name='Total'
+                  name='total_activos'
                 />
                  <FormikControl
                   control='InputPrfix'
                   type='number'
                   prfix='COP'
                   label='Egresos:'
-                  name='Egresos'
+                  name='egresos'
                 />
                   <FormikControl
                   control='InputPrfix'
                   type='number'
                   prfix='COP'
                   label='Total Pasivos:'
-                  name='Pasivos'
+                  name='total_pasivos'
                 />
                </section>
                <section>
@@ -196,6 +183,7 @@ export const Step2 = ({userType,activeStep,handleNext,handleBack}) => {
           </div>
           </section>
 
+          {error&&<Popup reset={formik.setErrors}/>}
 
               </Form>
             </div>
