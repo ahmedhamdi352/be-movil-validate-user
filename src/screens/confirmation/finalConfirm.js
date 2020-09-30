@@ -31,8 +31,52 @@ import logo1 from '../../assest/images/Group5216.png'
 import logo2 from '../../assest/images/Group5032.png'
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
  const FinalConfirm =({history})=>  {
+
+    const general_info = useSelector(state=> state.wizard.step1_natural)
+    const step2 = useSelector(state=> state.wizard.step2)
+    const fileOne = useSelector(state=> state.wizard.fileone)
+    const fileTwo = useSelector(state=> state.wizard.filetwo)
+    const info = useSelector(state=> state.wizard.info)
+    const photo1 = useSelector(state=> state.wizard.photo1)
+    const photo2 = useSelector(state=> state.wizard.photo2)
+    const photo3 = useSelector(state=> state.wizard.photo3)
+    const id_front = useSelector(state=> state.wizard.id_front)
+    const id_back = useSelector(state=> state.wizard.id_back)
+
+
+
+    const finalData={
+       ...general_info,
+       ...step2,
+       firstFile:fileOne,
+       secondFile:fileTwo,
+       ...info,
+       client_image1:photo1,
+       client_image2:photo2,
+       client_image3:photo3,
+       id_image1:id_front,
+       id_image2:id_back,
+        _type:"Natural",
+
+    }
+
+    
+    const handelFinal = () =>{
+        console.log(finalData)
+        axios.post('http://10.1.1.46:8000/api/wizardlist/',finalData)
+        .then( (response) =>{
+            console.log(response);
+           
+         })
+        .catch( (error)=> {
+            console.log(error);
+        })
+        // history.push('/share')
+    }
 
     
     const [checked,setChecked]=React.useState(false)
@@ -78,7 +122,7 @@ import Button from '@material-ui/core/Button';
                   style={{marginTop:'6%',width:'15%'}}
                   type='submit'
                   variant="outlined" 
-                  onClick={()=>{history.push('/share')}}
+                  onClick={handelFinal}
                   >
                      Firmar
                 </Button>
