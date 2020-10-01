@@ -97,7 +97,7 @@ import { map } from 'lodash';
                   <BlobProvider document={<Quixote data={PdfData}/>}>
          {({ blob, url, loading, error }) => {
            console.log(url)
-         return      <a  href={"google.com"} target="_balck"
+         return      <a  href={url} target="_balck"
                   style={{width:'180px',padding: '8px',marginRight:'20px'}}
                   className='btn_print'
                   type='submit'
