@@ -15,7 +15,9 @@ import Step1 from './steps/stepOne'
 import Step2 from './steps/stepTwo'
 import Step3 from './steps/step3'
 import Step4 from './steps/step4/index'
-
+import { useSelector } from 'react-redux';
+import * as WizardActions from '../../store/actions/wizard'
+import { useDispatch } from 'react-redux';
 // import Step1 from './steps/step1';
 const useQontoStepIconStyles = makeStyles({
   root: {
@@ -190,8 +192,11 @@ function getStepContent(userType,step ,handleBack,handleNext) {
 }
 
 export default function CustomizedSteppers({history}) {
+  const dispatch=useDispatch();
+  const  activeStep= useSelector(state=> state.wizard.activeStep)
+
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
+  // const [activeStep, setActiveStep] = React.useState(0);
   const actionType = localStorage.getItem('action')
   const userType =  localStorage.getItem('userType');
 
@@ -200,16 +205,17 @@ export default function CustomizedSteppers({history}) {
       history.push('/info')
 
     }
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    else{
+
+      dispatch(WizardActions.setActiveStep(activeStep + 1))
+    }
+    // setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    dispatch(WizardActions.setActiveStep(activeStep - 1))
   };
 
-  const handleReset = () => {
-    setActiveStep(0);
-  };
 
   return (
     <div className={classes.root} style={{marginTop:'6px'}}>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import {get, isEmpty} from 'lodash'
 import { Formik, Form } from 'formik'
@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import {steps} from '../../steps/stepSetting'
+import Popup from '../../../../components/popup'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -29,26 +30,31 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export const Natural = ({activeStep,handleBack,handleNext}) => {
+export const Natural = ({activeStep,handleBack,handleNext,}) => {
   const classes = useStyles();
   const dispatch=useDispatch();
 
   const initialValues = useSelector(state => state.wizard.step1_natural);
-  console.log(initialValues)
+  const error = useSelector(state => state.wizard.error);
 
-  
-    
-    
+ 
       const validationSchema = Yup.object({
+        firstname: Yup.string().required()
         
       })
     
-      const onSubmit = values => {
-        console.log('Form data', values)
-        const action =  WizardActions.setStepOneNatural(values)
-        dispatch(action);
-        handleNext()
+      const onSubmit = (values,formik) => {
+
+        // formik.setErrors({})
+
+
+          const action =  WizardActions.setStepOneNatural(values)
+          dispatch(action);
+          handleNext()
+     
+  
       }
+ 
     
     return (
         <div className='LogContainer'>
@@ -59,9 +65,14 @@ export const Natural = ({activeStep,handleBack,handleNext}) => {
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={onSubmit}
+          validateOnChange={false}
+          validateOnBlur={false}
+          // isInitialValid={false}
          >
-          {formik => {
+          {formik  => {
+            console.log(formik)
               return (
+                
                  <div className='formContent'>
               <Form className='form'>
                   <div className='form'>
@@ -157,11 +168,13 @@ export const Natural = ({activeStep,handleBack,handleNext}) => {
             </div>
           </div>
                 
+              {error&&<Popup reset={formik.setErrors}/>}
               </Form>
                </div>
             )
           }}
         </Formik> 
+        {/* {checkErr()} */}
         </div>
     )
     

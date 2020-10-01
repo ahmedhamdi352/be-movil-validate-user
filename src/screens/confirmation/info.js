@@ -9,38 +9,30 @@ import './style.scss'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import * as WizardActions from '../../store/actions/wizard'
-import {API_URL} from '../../config';
-import axios from 'axios';
+import Popup from '../../components/popup'
 
 
  const Info = ({history}) => {
    const dispatch=useDispatch();
+
   const initialValues = useSelector(state => state.wizard.info);
-  const general_info = useSelector(state=> state.wizard.step1_natural)
-  
+  const error = useSelector(state => state.wizard.error);
+
 
   console.log("init",initialValues)
     
     
       const validationSchema = Yup.object({
-        // email: Yup.string()
-        //   .email('Invalid email format')
-        //   .required('Required'),
-        // password: Yup.string().required('Required')
+     
+        name_info: Yup.string().required('Required')
       })
     
-      const onSubmit = values => {
+      const onSubmit = async values => {
         console.log('Form data', values)
 
         const action =  WizardActions.setinfo(values)
         dispatch(action);
         //handel send sms APi
-        axios.post(`${API_URL}api/verify`,{phone:general_info.mobile_phone})
-        .then((res)=>{
-          console.log(res)
-        })
-        .catch((err)=>console.log(err))
-
 
         history.push('/valide-sms')
 
@@ -51,7 +43,7 @@ import axios from 'axios';
           <p className= 'textAction'>FIRMA DEL CONTRATO</p> 
         </div>
         <div className='confirmContent'>
-            <div className='back'>
+            <div className='back' onClick={()=>history.goBack()}>
                 <KeyboardBackspaceIcon/>
             </div>
 
@@ -71,6 +63,8 @@ import axios from 'axios';
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={onSubmit}
+          validateOnChange={false}
+          validateOnBlur={false}
          >
           {formik => {
               return (
@@ -117,6 +111,8 @@ import axios from 'axios';
                   >
                      Continue
                 </Button>
+                {error&&<Popup reset={formik.setErrors}/>}
+
                 
               </Form>
             )

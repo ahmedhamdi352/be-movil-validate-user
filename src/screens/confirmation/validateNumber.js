@@ -19,7 +19,7 @@ const ValidateNumber = ({ history }) => {
 
         const fetch = async () => {
 
-            axios.get('http://localhost:8000/api/verify/01011254202/')
+            axios.get('http://localhost:8000/api/verify/01011254202/git ')
                 .then((res) => {
                     console.log(res)
                 })

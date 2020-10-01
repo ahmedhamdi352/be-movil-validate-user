@@ -9,19 +9,18 @@ import {SET_FILE_ONE,SET_FILE_TWO} from '../../../../store/actions/wizard'
 
 class App extends Component { 
 
-	state = { 
+	// state = { 
 
-	// Initially, no file is selected 
-    selectedFile: null,
-    selectedFile1:null
-	}; 
+	// // Initially, no file is selected 
+    // selectedFile: null,
+    // selectedFile1:null
+	// }; 
 	
 	// On file select (from the pop up) 
 	onFileChange = event => { 
 	
 	// Update the state 
-    this.setState({ selectedFile: event.target.files[0] }); 
-    console.log( event.target.files[0])
+    this.setState({ selectedFile: event.target.files[0]});
     this.props.setFileOne(event.target.files[0])
 	
     };
@@ -32,16 +31,18 @@ class App extends Component {
 
     } 
 
-    
+
 	
 	fileData = () => { 
-	
+        const {fileDataTwo,fileDataOne}=this.props
+        fileDataOne !==null && console.log(URL.createObjectURL(fileDataOne))
 
-		
 		return ( 
 		<div className='filenames'> 
-		{this.state.selectedFile &&	<p> {this.state.selectedFile.name}</p> }
-        {this.state.selectedFile1 && <p> {this.state.selectedFile1.name}</p> }
+        {fileDataOne !==null && <a href= {URL.createObjectURL(fileDataOne)}target="_balck"></a>}
+        {fileDataOne !==null && <p> {URL.createObjectURL(fileDataOne)}</p> }
+
+        {fileDataTwo !==null && <p> {fileDataTwo.name}</p> }
 			
 		</div> 
 		); 
@@ -49,7 +50,7 @@ class App extends Component {
 	}; 
 	
 	render() { 
-        const {userType,activeStep,handleNext,handleBack}=this.props
+        const {fileDataTwo,fileDataOne}=this.props
 
 	
 	return ( 
@@ -62,14 +63,14 @@ class App extends Component {
                 <div className='uoload_content'>
                     
                 <input type="file" id="file" onChange={this.onFileChange} />
-                      <label for="file" style={this.state.selectedFile?{borderWidth:'2px',borderColor:'#eb062a'}:null}>
+                      <label for="file" style={fileDataOne?{borderWidth:'2px',borderColor:'#eb062a'}:null}>
                       <p className='text_bold'>CAMARA DE COMERCIO*</p>
                       <LocalMallIcon/>
                       <p className='text_normal'>Certificado de Existencia y Representación Legal con vigencia no superior a 60 días </p>
                     </label>
 
                 <input type="file" id="file1" onChange={this.onFile1Change} />
-                    <label for="file1" style={this.state.selectedFile1?{borderWidth:'2px',borderColor:'#eb062a'}:null}>
+                    <label for="file1" style={fileDataTwo?{borderWidth:'2px',borderColor:'#eb062a'}:null}>
                      <p className='text_bold'>RUT*</p>
                      <LocalMallIcon/>
                      <p className='text_normal'>registro único tributario actualizado en la Dian </p>
@@ -99,6 +100,15 @@ const dispatchToProps = (dispatch) => ({
     })
 },
   
-  });
+});
+
+const mapStateToProps = state => ({ 
+    fileDataOne: state.wizard.fileone,
+    fileDataTwo: state.wizard.filetwo
+
+
+})
+
+
   
-  export default connect(null, dispatchToProps)(App);
+  export default connect(mapStateToProps, dispatchToProps)(App);
